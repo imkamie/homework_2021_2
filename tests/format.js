@@ -51,4 +51,50 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
+
+	// Собственные тесты
+	QUnit.test('format работает правильно c несколькими колонками, самое длинное число в середине', function (assert) {
+		const input = [ 1, 100, -100, 10000, 10, -10, 0 ];
+
+		const expected2 =
+		'   1   100\n' +
+		'-100 10000\n' +
+		'  10   -10\n' +
+		'   0';
+
+		const expected3 =
+		'    1 100 -100\n' +
+		'10000  10  -10\n' +
+		'    0';
+
+		assert.strictEqual(format(input, 2), expected2);
+		assert.strictEqual(format(input, 3), expected3);
+	});
+
+	QUnit.test('format работает правильно c числом колонок, равным числу чисел', function (assert) {
+		const input = [ 1, 100, -100, 10000, 10, -10, 0 ];
+
+		const expected = '1 100 -100 10000 10 -10 0';
+
+		assert.strictEqual(format(input, input.length), expected);
+	});
+
+	QUnit.test('format работает правильно c одним числом', function (assert) {
+		const input = [ 0 ];
+
+		const expected = '0';
+
+		assert.strictEqual(format(input, 1), expected);
+		assert.strictEqual(format(input, 2), expected);
+		assert.strictEqual(format(input, 5), expected);
+	});
+
+	QUnit.test('format работает правильно c невалидными данными', function (assert) {
+		assert.throws(() => format([1, 2], 0));
+		assert.throws(() => format([1, 2], -2));
+		assert.throws(() => format([], 1));
+		assert.throws(() => format(0, 1));
+		assert.throws(() => format('hello', 2));
+		assert.throws(() => format({}, 1));
+	});
 });
