@@ -1,20 +1,28 @@
 'use strict';
 
 /**
- * Функция форматирует переданные массив из целых чисел в несколько колонок
+ * Функция проверяет переданный аргумент на то, является ли он целым числом
  * 
- * @param {Array} input - исходный массив чисел
- * @param {Number} columns - количество колонок
- * @returns {String} - отформатированная строка
+ * @param {Number} element - проверяемое число
+ * @returns {Boolean}
  */
 
-function isElementInteger(element) {
+const isElementInteger = (element) => {
     if (!Number.isInteger(element)) {
         throw new TypeError('Invalid input');
     }
 
     return true;
 };
+
+
+/**
+ * Функция форматирует переданный массив из целых чисел в несколько колонок
+ * 
+ * @param {Array} input - исходный массив чисел
+ * @param {Number} columns - количество колонок
+ * @returns {String} - отформатированная строка
+ */
 
 const format = (input, columns) => {
     if (columns <= 0 || input.length === 0 || !Array.isArray(input) || !input) {
