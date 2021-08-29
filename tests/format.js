@@ -92,9 +92,13 @@ QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format работает правильно c невалидными данными', function (assert) {
 		assert.throws(() => format([1, 2], 0));
 		assert.throws(() => format([1, 2], -2));
+		assert.throws(() => format([0, null, 4, 10], 4));
+		assert.throws(() => format([undefined, undefined, null], 3));
 		assert.throws(() => format([], 1));
 		assert.throws(() => format(0, 1));
 		assert.throws(() => format('hello', 2));
 		assert.throws(() => format({}, 1));
+		assert.throws(() => format(null, 1));
+		assert.throws(() => format(undefined, 1));
 	});
 });

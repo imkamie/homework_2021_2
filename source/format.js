@@ -9,24 +9,24 @@
  */
 
 const format = (input, columns) => {
-    if (columns <= 0 || input.length === 0 || !Array.isArray(input)) {
+    if (columns <= 0 || input.length === 0 || !Array.isArray(input) || input.some(element => typeof element !== "number")) {
         throw new TypeError('Invalid input');
     }
 
     input = input.map(item => item.toString());
 
-    let columnWidth = new Array();
+    let columnWidth = [];
 
-    input.forEach(function callback(element, index) {
+    input.forEach((element, index) => {
         let column = index % columns;
         columnWidth[column] = Math.max(element.length, columnWidth[column] || 0);
     });
 
-    return input.reduce(function(result, element, index) {
+    return input.reduce((result, element, index) => {
 		let column = index % columns;
 		let numberOfSpaces = columnWidth[column] - element.length;
 
-		result += ' '.repeat(numberOfSpaces) + element + ((column === columns - 1) ? '\n' : ' ');
+        result += ' '.repeat(numberOfSpaces) + element + ((column === columns - 1) ? '\n' : ' ');
 
         if (index === input.length - 1) {
             result = result.slice(0, -1);
@@ -34,4 +34,4 @@ const format = (input, columns) => {
 
 		return result;
 	}, '');
-}
+};
