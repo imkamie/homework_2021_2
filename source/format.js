@@ -18,13 +18,13 @@ const format = (input, columns) => {
     let columnWidth = [];
 
     input.forEach((element, index) => {
-        let column = index % columns;
+        const column = index % columns;
         columnWidth[column] = Math.max(element.length, columnWidth[column] || 0);
     });
 
     return input.reduce((result, element, index) => {
-		let column = index % columns;
-		let numberOfSpaces = columnWidth[column] - element.length;
+		const column = index % columns;
+		const numberOfSpaces = columnWidth[column] - element.length;
 
         result += ' '.repeat(numberOfSpaces) + element + ((column === columns - 1) ? '\n' : ' ');
 
