@@ -9,13 +9,13 @@
  */
 
 const format = (input, columns) => {
-    if (columns <= 0 || input.length === 0 || !Array.isArray(input) || input.some(element => typeof element !== "number")) {
+    if (columns <= 0 || input.length === 0 || !Array.isArray(input) || input.some(element => typeof element !== 'number')) {
         throw new TypeError('Invalid input');
     }
 
     input = input.map(item => item.toString());
 
-    let columnWidth = [];
+    const columnWidth = [];
 
     input.forEach((element, index) => {
         const column = index % columns;
