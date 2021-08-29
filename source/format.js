@@ -23,8 +23,8 @@ const format = (input, columns) => {
     });
 
     return input.reduce((result, element, index) => {
-		const column = index % columns;
-		const numberOfSpaces = columnWidth[column] - element.length;
+        const column = index % columns;
+        const numberOfSpaces = columnWidth[column] - element.length;
 
         result += ' '.repeat(numberOfSpaces) + element + ((column === columns - 1) ? '\n' : ' ');
 
@@ -32,6 +32,6 @@ const format = (input, columns) => {
             result = result.slice(0, -1);
         }
 
-		return result;
+        return result;
 	}, '');
 };
