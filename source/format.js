@@ -9,7 +9,9 @@
  */
 
 const format = (input, columns) => {
-    if (columns <= 0 || input.length === 0 || !Array.isArray(input) || input.some(element => typeof element !== 'number')) {
+    if (columns <= 0 || input.length === 0 || !Array.isArray(input) ||
+        input.some(element => typeof element !== 'number' ||
+        input === null || input === undefined)) {
         throw new TypeError('Invalid input');
     }
 
