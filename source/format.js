@@ -8,13 +8,24 @@
  * @returns {String} - отформатированная строка
  */
 
-const format = (input, columns) => {
-    if (columns <= 0 || input.length === 0 || !Array.isArray(input) ||
-        input.some(element => !Number.isInteger(element)) || !input) {
+function isElementInteger(element) {
+    if (!Number.isInteger(element)) {
         throw new TypeError('Invalid input');
     }
 
-    input = input.map(item => item.toString());
+    return true;
+};
+
+const format = (input, columns) => {
+    if (columns <= 0 || input.length === 0 || !Array.isArray(input) || !input) {
+        throw new TypeError('Invalid input');
+    }
+
+    input = input.map(item => {
+        if (isElementInteger(item)) {
+            return item.toString();
+        }
+    });
 
     const columnWidth = [];
 
