@@ -29,7 +29,7 @@ const format = (input, columns) => {
         throw new TypeError('Invalid input');
     }
 
-    const inputWithStrings = input.map(item => {
+    const inputWithStrings = input.map((item) => {
         if (isElementInteger(item)) {
             return item.toString();
         }
