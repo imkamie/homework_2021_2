@@ -35,12 +35,12 @@ const format = (input, columns) => {
         }
     });
 
-    const columnWidth = [];
-
-    inputWithStrings.forEach((element, index) => {
+    const columnWidth = inputWithStrings.reduce((accumulator, element, index) => {
         const column = index % columns;
-        columnWidth[column] = Math.max(element.length, columnWidth[column] || 0);
-    });
+        accumulator[column] = Math.max(element.length, accumulator[column] || 0);
+
+        return accumulator;
+    }, new Array(columns));
 
     const indexOfLastColumn = columns - 1;
     const indexOfLastElement = inputWithStrings.length - 1;
