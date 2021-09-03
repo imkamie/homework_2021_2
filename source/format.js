@@ -3,12 +3,12 @@
 /**
  * Функция проверяет переданный аргумент на то, является ли он целым числом
  * 
- * @param {Number} element - проверяемое число
+ * @param {Number} number - проверяемое число
  * @returns {Boolean} - возвращает true, если аргумент является целым числом
  */
 
-const isElementInteger = (element) => {
-    if (!Number.isInteger(element)) {
+const isElementInteger = (number) => {
+    if (!Number.isInteger(number)) {
         throw new TypeError('Invalid input');
     }
 
@@ -19,7 +19,7 @@ const isElementInteger = (element) => {
 /**
  * Функция форматирует переданный массив из целых чисел в несколько колонок
  * 
- * @param {Array} input - исходный массив чисел
+ * @param {Number[]} input - исходный массив чисел
  * @param {Number} columns - количество колонок
  * @returns {String} - отформатированная строка
  */
@@ -35,21 +35,21 @@ const format = (input, columns) => {
         }
     });
 
-    const columnWidth = inputWithStrings.reduce((accumulator, element, index) => {
+    const columnWidth = inputWithStrings.reduce((widthOfColumn, number, index) => {
         const column = index % columns;
-        accumulator[column] = Math.max(element.length, accumulator[column] || 0);
+        widthOfColumn[column] = Math.max(number.length, widthOfColumn[column] || 0);
 
-        return accumulator;
-    }, new Array(columns));
+        return widthOfColumn;
+    }, []);
 
     const indexOfLastColumn = columns - 1;
     const indexOfLastElement = inputWithStrings.length - 1;
 
-    return inputWithStrings.reduce((result, element, index) => {
+    return inputWithStrings.reduce((result, number, index) => {
         const column = index % columns;
-        const numberOfSpaces = columnWidth[column] - element.length;
+        const numberOfSpaces = columnWidth[column] - number.length;
 
-        result += ' '.repeat(numberOfSpaces) + element + ((column === indexOfLastColumn) ? '\n' : ' ');
+        result += ' '.repeat(numberOfSpaces) + number + ((column === indexOfLastColumn) ? '\n' : ' ');
 
         if (index === indexOfLastElement) {
             result = result.slice(0, -1);
